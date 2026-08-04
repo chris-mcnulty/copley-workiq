@@ -1,0 +1,16 @@
+id: fixture.passing.core
+version: 1.0.0
+license: Apache-2.0
+maintainers:
+  - name: Fixture Maintainer
+    role: Maintainer
+    contact: fixture@example.invalid
+conformance_profile: Core Bundle
+schemas:
+  - ../../../../schemas/workiq-bundle.schema.json
+  - ../../../../schemas/concept.schema.json
+  - ../../../../schemas/process.schema.json
+default_language: en
+sensitivity_model: fixture-only
+validation_rules:
+  - Passing fixture should validate successfully

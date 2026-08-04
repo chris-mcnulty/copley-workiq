@@ -1,0 +1,19 @@
+id: sample-agent.agent-profile
+version: 1.0.0
+license: Apache-2.0
+maintainers:
+  - name: Sample Agent Maintainers
+    role: Maintainer
+    contact: agents@example.invalid
+conformance_profile: Agent Profile
+schemas:
+  - ../../schemas/workiq-bundle.schema.json
+  - ../../schemas/concept.schema.json
+  - ../../schemas/agent.schema.json
+  - ../../schemas/skill.schema.json
+default_language: en
+sensitivity_model: internal-use with human approval for external actions
+validation_rules:
+  - Agent Profile requires Core Bundle validation
+  - Agent records must include tools, memory scope, and safety rules
+  - Optional semantic exports may be validated separately

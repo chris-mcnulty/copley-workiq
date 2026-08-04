@@ -1,0 +1,18 @@
+id: fictional-company.core-bundle
+version: 1.0.0
+license: Apache-2.0
+maintainers:
+  - name: Fictional Company Knowledge Team
+    role: Maintainer
+    contact: maintainers@example.invalid
+conformance_profile: Core Bundle
+schemas:
+  - ../../schemas/workiq-bundle.schema.json
+  - ../../schemas/concept.schema.json
+  - ../../schemas/process.schema.json
+default_language: en
+sensitivity_model: internal-by-default with explicit review for external publication
+validation_rules:
+  - All manifests must pass workiq-bundle.schema.json
+  - All concept frontmatter must pass the matching object schema
+  - Core Bundle adoption does not require RDF or SHACL

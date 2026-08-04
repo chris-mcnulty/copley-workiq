@@ -1,0 +1,36 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wiq: <https://workiq.dev/ns#> .
+
+wiq:ConceptShape a sh:NodeShape ;
+  sh:targetClass wiq:Concept ;
+  sh:property [
+    sh:path wiq:id ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Every concept export must include a stable wiq:id string." ;
+  ] ;
+  sh:property [
+    sh:path wiq:title ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Every concept export must include a human-readable wiq:title." ;
+  ] ;
+  sh:property [
+    sh:path wiq:description ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Every concept export must include a wiq:description." ;
+  ] ;
+  sh:property [
+    sh:path wiq:status ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Every concept export must include a lifecycle wiq:status." ;
+  ] ;
+  sh:property [
+    sh:path wiq:owner ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Every concept export must identify a wiq:owner." ;
+  ] .

@@ -1,0 +1,33 @@
+{
+  "$id": "https://workiq.dev/schemas/process.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Work IQ Process Record",
+  "description": "Process specialization for workflows and operational patterns.",
+  "type": "object",
+  "allOf": [
+    { "$ref": "./concept.schema.json" },
+    {
+      "properties": {
+        "type": {
+          "const": "Process"
+        },
+        "inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "approvals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "service_levels": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  ]
+}
