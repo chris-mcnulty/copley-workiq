@@ -1,0 +1,26 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wiq: <https://workiq.dev/ns#> .
+
+wiq:ProvenanceShape a sh:NodeShape ;
+  sh:targetClass wiq:Concept ;
+  sh:property [
+    sh:path wiq:source ;
+    sh:minCount 1 ;
+    sh:message "Semantic exports should preserve at least one source reference." ;
+  ] ;
+  sh:property [
+    sh:path wiq:generatedAt ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:dateTime ;
+    sh:message "When present, wiq:generatedAt must be an xsd:dateTime value." ;
+  ] ;
+  sh:property [
+    sh:path wiq:verifiedAt ;
+    sh:datatype xsd:dateTime ;
+    sh:message "When present, wiq:verifiedAt must be an xsd:dateTime value." ;
+  ] ;
+  sh:property [
+    sh:path wiq:attestation ;
+    sh:message "Attested concepts should retain a wiq:attestation reference or literal." ;
+  ] .

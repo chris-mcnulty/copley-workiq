@@ -1,0 +1,32 @@
+name: Validate Work IQ Bundles
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install validator dependencies
+        run: pip install -r validators/requirements.txt
+
+      - name: Validate example bundles
+        run: python validators/validate.py --root examples
+
+      - name: Validate passing fixtures
+        run: python validators/validate.py --root validators/conformance-tests/passing
+
+      - name: Validate failing fixtures
+        run: python validators/validate.py --root validators/conformance-tests/failing --expect-fail

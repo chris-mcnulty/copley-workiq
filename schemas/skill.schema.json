@@ -1,0 +1,34 @@
+{
+  "$id": "https://workiq.dev/schemas/skill.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Work IQ Skill Record",
+  "description": "Agent skill specialization for reusable procedures and prompts.",
+  "type": "object",
+  "allOf": [
+    { "$ref": "./concept.schema.json" },
+    {
+      "required": ["inputs", "outputs"],
+      "properties": {
+        "type": {
+          "const": "Skill"
+        },
+        "inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "preconditions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "approval_rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

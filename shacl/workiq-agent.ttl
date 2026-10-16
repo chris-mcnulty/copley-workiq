@@ -1,0 +1,30 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wiq: <https://workiq.dev/ns#> .
+
+wiq:AgentShape a sh:NodeShape ;
+  sh:targetClass wiq:Agent ;
+  sh:property [
+    sh:path wiq:capability ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Agent exports must declare at least one wiq:capability." ;
+  ] ;
+  sh:property [
+    sh:path wiq:skill ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Agent exports must declare at least one wiq:skill." ;
+  ] ;
+  sh:property [
+    sh:path wiq:memoryBoundary ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Agent exports must describe the memory boundary." ;
+  ] ;
+  sh:property [
+    sh:path wiq:safetyRule ;
+    sh:minCount 1 ;
+    sh:datatype xsd:string ;
+    sh:message "Agent exports must include at least one safety rule." ;
+  ] .

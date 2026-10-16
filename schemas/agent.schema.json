@@ -1,0 +1,68 @@
+{
+  "$id": "https://workiq.dev/schemas/agent.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Work IQ Agent Record",
+  "description": "Agent Profile specialization for agent documentation objects.",
+  "type": "object",
+  "allOf": [
+    { "$ref": "./concept.schema.json" },
+    {
+      "required": ["capabilities", "skills", "tools", "memory_scope", "safety_rules"],
+      "properties": {
+        "type": {
+          "const": "Agent"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "skills": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "kind"],
+            "properties": {
+              "name": { "type": "string" },
+              "kind": { "type": "string" },
+              "endpoint": { "type": "string" },
+              "mcp_resource": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "discovery": {
+          "type": "object",
+          "properties": {
+            "a2a": { "type": "string" },
+            "oasf_taxonomy": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "memory_scope": {
+          "type": "object",
+          "required": ["retention", "boundary"],
+          "properties": {
+            "retention": { "type": "string" },
+            "boundary": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "safety_rules": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "approval_rules": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  ]
+}

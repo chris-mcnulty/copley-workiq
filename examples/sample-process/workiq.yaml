@@ -1,0 +1,17 @@
+id: sample-process.core-bundle
+version: 1.0.0
+license: Apache-2.0
+maintainers:
+  - name: Sample Process Maintainers
+    role: Maintainer
+    contact: process@example.invalid
+conformance_profile: Core Bundle
+schemas:
+  - ../../schemas/workiq-bundle.schema.json
+  - ../../schemas/concept.schema.json
+  - ../../schemas/process.schema.json
+default_language: en
+sensitivity_model: internal operational guidance
+validation_rules:
+  - Process concepts must pass process.schema.json
+  - Core Bundle does not require semantic export

@@ -1,0 +1,15 @@
+id: sample-metric.attestation
+version: 1.0.0
+license: Apache-2.0
+maintainers:
+  - name: Sample Metric Maintainers
+    role: Maintainer
+    contact: metrics@example.invalid
+conformance_profile: Core Bundle
+schemas:
+  - ../../schemas/workiq-bundle.schema.json
+  - ../../schemas/concept.schema.json
+default_language: en
+sensitivity_model: internal metrics with approved-query governance
+validation_rules:
+  - Metric concepts must include attestation metadata when used for decision support
