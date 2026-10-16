@@ -117,7 +117,7 @@ def validate_exports(bundle_dir: Path) -> list[str]:
         shapes_graph.parse(shape_path)
 
     errors: list[str] = []
-for export in exports:
+    for export in exports:
         if not isinstance(export, dict) or "path" not in export:
             errors.append(f"{bundle_dir}/workiq.yaml: exports entries must be objects with a 'path'")
             continue
