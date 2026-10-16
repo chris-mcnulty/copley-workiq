@@ -55,6 +55,7 @@ PRs that change bundle formats, validation behavior, or semantic mappings **SHOU
 Project artifacts use these lifecycle states:
 
 - **draft** — under active review and not yet stable for general adoption
+- **stable** — reviewed and safe for general adoption, but not necessarily the latest normative version
 - **current** — approved for active implementation
 - **deprecated** — still readable, but scheduled for replacement or removal
 - **archived** — retained for recordkeeping only
