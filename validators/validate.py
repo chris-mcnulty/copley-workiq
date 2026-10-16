@@ -106,14 +106,29 @@ def validate_exports(bundle_dir: Path) -> list[str]:
         shapes_graph.parse(shape_path)
 
     errors: list[str] = []
-    for export in exports:
+for export in exports:
+        if not isinstance(export, dict) or "path" not in export:
+            errors.append(f"{bundle_dir}/workiq.yaml: exports entries must be objects with a 'path'")
+            continue
         export_path = bundle_dir / export["path"]
         if not export_path.exists():
             errors.append(f"{export_path}: declared export file does not exist")
             continue
-        data_graph = Graph()
-        data_graph.parse(export_path)
-        conforms, _, report_text = shacl_validate(data_graph, shacl_graph=shapes_graph, inference="rdfs")
+        try:
+            data_graph = Graph()
+            data_graph.parse(export_path)
+        except Exception as exc:
+            errors.append(f"{export_path}: failed to parse RDF export ({exc})")
+            continue
+        try:
+            conforms, _, report_text = shacl_validate(
+                data_graph,
+                shacl_graph=shapes_graph,
+                inference="rdfs",
+            )
+        except Exception as exc:
+            errors.append(f"{export_path}: SHACL validation errored ({exc})")
+            continue
         if not conforms:
             errors.append(f"{export_path}: SHACL validation failed\n{report_text}")
     return errors
