@@ -1,6 +1,6 @@
 # Governance
 
-Work IQ Open Format follows an Open Compute Project-inspired governance model centered on transparent stewardship, working groups, and versioned artifacts.
+This repository covers both the current Copley specification draft and the earlier Work IQ bundle conventions that are still used in validation and examples. The project governance therefore focuses on maintaining coherence between the canonical specification in `SPEC.md` and the validator-facing examples in `examples/` and `schemas/`.
 
 ## 1. Maintainers and working groups
 

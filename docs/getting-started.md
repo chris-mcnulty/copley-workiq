@@ -1,11 +1,11 @@
 # Getting Started
 
-Work IQ Open Format is designed to be approachable with plain files, Git, and common validation tools.
+The repository is currently split between the Copley draft specification and the working Work IQ bundle examples. The most up-to-date normative language lives in `SPEC.md`, while the example bundles use the validator-backed Git-native layout with a `copley.yaml` manifest.
 
 ## Start with Core Bundle
 
 1. Copy the structure in `examples/fictional-company/`.
-2. Create a `workiq.yaml` manifest.
+2. Create a `copley.yaml` manifest.
 3. Add one or more Markdown concept documents with YAML frontmatter.
 4. Validate locally with the Python validator.
 
