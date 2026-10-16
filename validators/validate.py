@@ -72,8 +72,15 @@ def build_registry() -> Registry:
 
 def make_validator(schema_name: str) -> Draft202012Validator:
     schema = load_json(SCHEMAS_DIR / schema_name)
-    registry = build_registry().with_resource(str((SCHEMAS_DIR / schema_name).resolve().as_uri()), Resource.from_contents(schema))
-    return Draft202012Validator(schema, registry=registry)
+    registry = build_registry().with_resource(
+        str((SCHEMAS_DIR / schema_name).resolve().as_uri()),
+        Resource.from_contents(schema),
+    )
+    return Draft202012Validator(
+        schema,
+        registry=registry,
+        format_checker=Draft202012Validator.FORMAT_CHECKER,
+    )
 
 
 def validate_manifest(bundle_dir: Path) -> list[str]:
