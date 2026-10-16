@@ -89,7 +89,11 @@ def schema_name_for(frontmatter: dict[str, Any]) -> str:
 def validate_documents(bundle_dir: Path) -> list[str]:
     errors: list[str] = []
     for path in sorted(bundle_dir.rglob("*.md")):
-        frontmatter = extract_frontmatter(path)
+        try:
+            frontmatter = extract_frontmatter(path)
+        except Exception as exc:
+            errors.append(f"{path}: failed to load YAML frontmatter ({exc})")
+            continue
         validator = make_validator(schema_name_for(frontmatter))
         errors.extend(f"{path}: {error.message}" for error in validator.iter_errors(frontmatter))
     return errors
