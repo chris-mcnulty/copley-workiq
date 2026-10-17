@@ -57,9 +57,11 @@ def extract_frontmatter(path: Path) -> dict[str, Any]:
 
 
 def iter_bundles(root: Path) -> list[Path]:
-    if (root / "workiq.yaml").exists():
-        return [root]
-    return sorted(path.parent for path in root.rglob("workiq.yaml"))
+    candidates = [root / "copley.yaml", root / "workiq.yaml"]
+    for manifest in candidates:
+        if manifest.exists():
+            return [root]
+    return sorted({path.parent for path in root.rglob("copley.yaml")} | {path.parent for path in root.rglob("workiq.yaml")})
 
 
 def build_registry() -> Registry:
@@ -84,9 +86,12 @@ def make_validator(schema_name: str) -> Draft202012Validator:
 
 
 def validate_manifest(bundle_dir: Path) -> list[str]:
-    manifest = load_yaml(bundle_dir / "workiq.yaml")
+    manifest_path = bundle_dir / "copley.yaml"
+    if not manifest_path.exists():
+        manifest_path = bundle_dir / "workiq.yaml"
+    manifest = load_yaml(manifest_path)
     validator = make_validator("workiq-bundle.schema.json")
-    return [f"{bundle_dir}/workiq.yaml: {error.message}" for error in validator.iter_errors(manifest)]
+    return [f"{manifest_path}: {error.message}" for error in validator.iter_errors(manifest)]
 
 
 def schema_name_for(frontmatter: dict[str, Any]) -> str:
@@ -107,7 +112,10 @@ def validate_documents(bundle_dir: Path) -> list[str]:
 
 
 def validate_exports(bundle_dir: Path) -> list[str]:
-    manifest = load_yaml(bundle_dir / "workiq.yaml") or {}
+    manifest_path = bundle_dir / "copley.yaml"
+    if not manifest_path.exists():
+        manifest_path = bundle_dir / "workiq.yaml"
+    manifest = load_yaml(manifest_path) or {}
     exports = manifest.get("exports", [])
     if not exports:
         return []
@@ -119,7 +127,7 @@ def validate_exports(bundle_dir: Path) -> list[str]:
     errors: list[str] = []
     for export in exports:
         if not isinstance(export, dict) or "path" not in export:
-            errors.append(f"{bundle_dir}/workiq.yaml: exports entries must be objects with a 'path'")
+            errors.append(f"{manifest_path}: exports entries must be objects with a 'path'")
             continue
         export_path = bundle_dir / export["path"]
         if not export_path.exists():

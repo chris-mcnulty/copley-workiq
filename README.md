@@ -1,6 +1,11 @@
-# Work IQ Open Format
+# Work IQ Open Format / Copley
 
-Work IQ Open Format is an open-source specification for packaging trustworthy work intelligence as plain-text, Git-native bundles that agents and people can read, validate, explain, update, and share. It solves a common gap in retrieval systems: agents can often retrieve knowledge, but they cannot reliably tell whether it is current, correct, or safe to act on. This format layers a governed, human-readable, machine-validatable profile on top of existing standards that already work, using Google's Open Knowledge Format (OKF) as the base bundle model, JSON Schema and SHACL for validation, and optional RDF / JSON-LD / DCAT / PROV export for graph interoperability. Work IQ Open Format augments brokered retrieval layers such as Microsoft's Work IQ rather than replacing them.
+This repository contains two layers of material that need to be kept distinct:
+
+- The current root-level draft specification in [`SPEC.md`](SPEC.md) and the root JSON Schema in [`copley.schema.json`](copley.schema.json) are the most recent Copley-oriented specification assets.
+- The project’s working bundle examples, JSON Schemas under [`schemas/`](schemas), and validator tooling still reflect the earlier Work IQ-oriented naming and are kept for compatibility and iteration.
+
+The repository is best understood as the Copley specification living alongside the older Work IQ implementation conventions. The root specification is the canonical source for the most up-to-date language, while `schemas/` and `examples/` continue to model the repository’s current validator-backed bundle format.
 
 ## Conformance tiers
 
@@ -12,14 +17,15 @@ Teams **MUST** be able to adopt Core Bundle without standing up RDF or SHACL inf
 
 ## Repository map
 
-- `SPEC.md` — normative specification skeleton
+- `SPEC.md` — current Copley draft specification
+- `copley.schema.json` — root-level Copley schema artifact for the draft specification
 - `GOVERNANCE.md` — project governance, states, working groups, and release process
 - `CONTRIBUTING.md` — contribution workflow, validator usage, and PR checklist
 - `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1
-- `schemas/` — JSON Schema definitions for the manifest and object types
+- `schemas/` — validator-facing JSON Schema definitions and compatibility artifacts
 - `shacl/` — SHACL shapes for semantic validation
 - `profiles/` — crosswalks to OKF, DCAT/PROV, MCP, OASF, and Agent Skills
-- `examples/` — example bundles and starter artifacts
+- `examples/` — example bundles and starter artifacts; manifests use `copley.yaml` and accept legacy `workiq.yaml` aliases
 - `validators/` — local validator, requirements, and conformance fixtures
 - `docs/` — onboarding, authoring, governance, and adoption guidance
 
@@ -34,4 +40,4 @@ pip install -r validators/requirements.txt
 python validators/validate.py --root examples/fictional-company
 ```
 
-The example shows how to define a `workiq.yaml` manifest and concept documents with trust and lifecycle metadata. Specification and documentation text in this repository is intended to be licensed under **CC-BY-4.0**, while code-like assets under `schemas/`, `shacl/`, and `validators/` are covered by **Apache-2.0**. **TODO:** maintainers should confirm the final dual-license policy before the first stable release.
+The bundle manifests in examples are currently named `copley.yaml`; older `workiq.yaml` names continue to be accepted for compatibility. Specification and documentation text in this repository is intended to be licensed under **CC-BY-4.0**, while code-like assets under `schemas/`, `shacl/`, and `validators/` are covered by **Apache-2.0**. **TODO:** maintainers should confirm the final dual-license policy before the first stable release.
