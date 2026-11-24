@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for contributing to Work IQ Open Format.
+Thank you for contributing to the Copley / Work IQ repository.
 
 ## Propose changes
 
@@ -23,7 +23,7 @@ python validators/validate.py --root validators/conformance-tests/failing --expe
 ## Add examples
 
 - Prefer small, realistic, plain-text examples.
-- Every new or changed bundle **SHOULD** include a `workiq.yaml` manifest.
+- Every new or changed bundle **SHOULD** include a `copley.yaml` manifest; the validator continues to accept legacy `workiq.yaml` for compatibility.
 - Keep examples Git-native and tool-agnostic.
 - If you add semantic export files, ensure they pass SHACL validation.
 
